@@ -14,6 +14,12 @@ func (*Artifact) BuilderId() string {
 	return BuilderId
 }
 
+// Destroy destroys the Softlayer image represented by the artifact.
+func (self *Artifact) Destroy() error {
+	log.Printf("Destroying image: %s", self.String())
+	return nil
+}
+
 // Files returns the files represented by the artifact.
 func (*Artifact) Files() []string {
 	return nil
