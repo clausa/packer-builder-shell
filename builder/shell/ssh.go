@@ -2,14 +2,13 @@ package shell
 
 import (
 	"code.google.com/p/go.crypto/ssh"
-	"errors"
 	"fmt"
 	"github.com/mitchellh/multistep"
 )
 
 func sshAddress(state multistep.StateBag) (string, error) {
 	config := state.Get("config").(config)
-	ipAddress := state.Get("IpAddress".(string)
+	ipAddress := state.Get("IpAddress").(string)
 	return fmt.Sprintf("%s:%d", ipAddress, config.SshPort), nil
 }
 

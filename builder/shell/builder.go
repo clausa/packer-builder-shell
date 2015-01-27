@@ -7,9 +7,7 @@ import (
 	"github.com/mitchellh/packer/common"
 	"github.com/mitchellh/packer/packer"
 	"log"
-	"os"
 	"time"
-	"strings"
 )
 
 // The unique ID for this builder.
@@ -61,7 +59,7 @@ func (self *Builder) Prepare(raws ...interface{}) (parms []string, retErr error)
 	}
 	self.config.tpl.UserVars = self.config.PackerUserVars
 
-	if self.config.hypervisor == "" {
+	if self.config.Hypervisor == "" {
 		self.config.Hypervisor = "esxi01"
 	}
 
@@ -77,8 +75,8 @@ func (self *Builder) Prepare(raws ...interface{}) (parms []string, retErr error)
 		self.config.InstanceMemory = 1024
 	}
 
-	if self.config.InstanceDiskCapacity == 0 {
-		self.config.InstanceDiskCapacity = 20
+	if self.config.InstanceDiskSize == 0 {
+		self.config.InstanceDiskSize = 20
 	}
 
 	if self.config.SshPort == 0 {
@@ -128,8 +126,6 @@ func (self *Builder) Prepare(raws ...interface{}) (parms []string, retErr error)
 	}
 	self.config.StateTimeout = stateTimeout
 
-	log.Println(common.ScrubConfig(self.config, self.config.APIKey, self.config.Username))
-
 	if len(errs.Errors) > 0 {
 		retErr = errors.New(errs.Error())
 	}
@@ -143,7 +139,6 @@ func (self *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (pa
 	// Set up the state which is used to share state between the steps
 	state := new(multistep.BasicStateBag)
 	state.Put("config", self.config)
-	state.Put("client", client)
 	state.Put("hook", hook)
 	state.Put("ui", ui)
 
