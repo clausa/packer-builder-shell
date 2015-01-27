@@ -39,7 +39,7 @@ func (self *stepCreateInstance) Run(state multistep.StateBag) multistep.StepActi
 		state.Put("error", err)
 		return multistep.ActionHalt
 	}
-	ui.Say(fmt.Printf("in all caps: %q\n", out.String()))
+	ui.Say("instance created")
 	state.Put("uuid", out.String())
 	return multistep.ActionContinue
 }

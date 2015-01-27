@@ -15,8 +15,7 @@ func (self *stepWaitforInstance) Run(state multistep.StateBag) multistep.StepAct
 	config := state.Get("config").(config)
 	ui := state.Get("ui").(packer.Ui)
 
-	ui.Say("Waiting for IP of server with UUID: %s", uuid)
-
+	ui.Say("Waiting for IP of server...")
 
 	// FIXME - loop ontil timeout
 	cmd := exec.Command("tr", "a-z", "A-Z")
