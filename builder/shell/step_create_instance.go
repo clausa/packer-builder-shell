@@ -5,6 +5,8 @@ import (
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/packer"
  	"os/exec"
+ 	"strings"
+ 	"bytes"
 )
 
 type stepCreateInstance struct {

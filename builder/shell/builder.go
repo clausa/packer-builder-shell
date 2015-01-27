@@ -96,7 +96,6 @@ func (self *Builder) Prepare(raws ...interface{}) (parms []string, retErr error)
 	}
 
 	templates := map[string]*string{
-		"username":               &self.config.Username,
 		"ssh_timeout":            &self.config.RawSshTimeout,
 		"instance_state_timeout": &self.config.RawStateTimeout,
 		"ssh_username":           &self.config.SshUserName,
@@ -167,6 +166,13 @@ func (self *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (pa
 		log.Println("Failed to find image_id in state. Bug?")
 		return nil, nil
 	}
+
+	// Create an artifact and return it
+	artifact := &Artifact{
+	uuid: state.Get("uuid").(string),
+	}
+
+	return artifact, nil
 }
 
 // Cancel.
