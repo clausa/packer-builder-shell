@@ -25,6 +25,11 @@ func (*Artifact) Files() []string {
 	return nil
 }
 
+// Id returns the uuid.
+func (self *Artifact) Id() string {
+	return self.uuid
+}
+
 func (self *Artifact) State(name string) interface{} {
 	return nil
 }
