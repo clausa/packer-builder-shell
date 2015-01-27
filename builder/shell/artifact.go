@@ -9,9 +9,9 @@ type Artifact struct {
 	uuid string
 }
 
-// uuid returns the uuid Id.
-func (*Artifact) uuid() string {
-	return self.uuid
+// BuilderId returns the builder Id.
+func (*Artifact) BuilderId() string {
+	return BuilderId
 }
 
 // Files returns the files represented by the artifact.
