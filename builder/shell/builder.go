@@ -21,6 +21,8 @@ type config struct {
 	InstanceCpu          int    `mapstructure:"instance_cpu"`
 	InstanceMemory       int64  `mapstructure:"instance_memory"`
 	InstanceDiskSize	 int    `mapstructure:"instance_disk_size"`
+	OsName				 string `mapstructure:"os_name"`
+	Network				 string `mapstructure:"network"`
 	SshPort              int64  `mapstructure:"ssh_port"`
 	SshUserName          string `mapstructure:"ssh_username"`
 	SshPrivateKeyFile    string `mapstructure:"ssh_private_key_file"`
@@ -77,6 +79,14 @@ func (self *Builder) Prepare(raws ...interface{}) (parms []string, retErr error)
 
 	if self.config.InstanceDiskSize == 0 {
 		self.config.InstanceDiskSize = 20
+	}
+
+	if self.config.OsName == "" {
+		self.config.OsName = "RHEL"
+	}
+
+	if self.config.Network == "" {
+		self.config.Network = "packer"
 	}
 
 	if self.config.SshPort == 0 {
