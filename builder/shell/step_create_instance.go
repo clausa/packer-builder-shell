@@ -16,7 +16,7 @@ func (self *stepCreateInstance) Run(state multistep.StateBag) multistep.StepActi
 	config := state.Get("config").(config)
 	ui := state.Get("ui").(packer.Ui)
 
-	instanceDefinition := &InstanceType{
+	/*instanceDefinition := &InstanceType{
 		ServerName:           config.ServerName,
 		Hypervisor:           config.Hypervisor,
 		Cpus:                 config.InstanceCpu,
@@ -24,7 +24,7 @@ func (self *stepCreateInstance) Run(state multistep.StateBag) multistep.StepActi
         DiskSize:             config.InstanceDiskSize,
 		OsName:               config.OsName,
 		Network:			  config.Network,
-	}
+	}*/
 
 	ui.Say("Creating an instance...")
 
@@ -44,7 +44,7 @@ func (self *stepCreateInstance) Run(state multistep.StateBag) multistep.StepActi
 }
 
 func (self *stepCreateInstance) Cleanup(state multistep.StateBag) {
-	config := state.Get("config").(config)
+	//config := state.Get("config").(config)
 	ui := state.Get("ui").(packer.Ui)
 
 	if self.instanceId == "" {

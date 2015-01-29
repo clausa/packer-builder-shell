@@ -12,14 +12,14 @@ type stepWaitforInstance struct{}
 
 func (self *stepWaitforInstance) Run(state multistep.StateBag) multistep.StepAction {
 	uuid := state.Get("server_uuid").(string)
-	config := state.Get("config").(config)
+	//config := state.Get("config").(config)
 	ui := state.Get("ui").(packer.Ui)
 
 	ui.Say("Waiting for IP of server...")
 
 	// FIXME - loop ontil timeout
 	cmd := exec.Command("tr", "a-z", "A-Z")
-	cmd.Stdin = strings.NewReader("my_lowercase_uuid1234")
+	cmd.Stdin = strings.NewReader(uuid)
 	var out bytes.Buffer
 	cmd.Stdout = &out
 	err := cmd.Run()
